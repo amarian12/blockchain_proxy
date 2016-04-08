@@ -75,6 +75,16 @@ module BigEarth
         blockchain = BigEarth::Blockchain::Blockchain.new
         blockchain.get_mem_pool_info
       end
+      
+      get '/get_raw_mem_pool.json' do
+        blockchain = BigEarth::Blockchain::Blockchain.new
+        blockchain.get_mem_pool_info
+      end
+      
+      get '/get_tx_out.json/:n' do
+        blockchain = BigEarth::Blockchain::Blockchain.new
+        blockchain.get_mem_pool_info
+      end
     end
   end
 end
