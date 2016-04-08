@@ -4,7 +4,8 @@ require 'sinatra/base'
 require "sinatra/config_file"
 require 'sinatra/json'
 require 'json'
-require 'resque'
+#require 'resque'
+require 'blockchain'
 module BigEarth
   module Blockchain
     class BlockchainProxy < Sinatra::Base
@@ -24,9 +25,17 @@ module BigEarth
         #Resque.enqueue BigEarth::Blockchain::BootstrapChefClient, config
       end
       
+      get '/get_best_block_hash.json/:hash/:verbose' do
+        # Parse data into ruby hash
+        data = JSON.parse request.body.read
+        config = data['config']
+        
+        blockchain = BigEarth::Blockchain::Blockchain.new
+        blockchain.get_best_block_hash params['hash'], params['verbose']
+      end
+      
       get '/get_info.json' do
         content_type :json
-        require 'blockchain'
         blockchain = BigEarth::Blockchain::Blockchain.new
         blockchain.get_info
       end
