@@ -23,6 +23,17 @@ module BigEarth
         { status: 'pong' }.to_json
         #Resque.enqueue BigEarth::Blockchain::BootstrapChefClient, config
       end
+      
+      get '/get_info.json' do
+        content_type :json
+        blockchain = Blockchain.new
+        info = blockchain.get_info
+        { 
+          status: 200,
+          info: info
+         }.to_json
+        #Resque.enqueue BigEarth::Blockchain::BootstrapChefClient, config
+      end
     end
   end
 end
