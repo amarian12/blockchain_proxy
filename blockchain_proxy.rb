@@ -25,13 +25,18 @@ module BigEarth
         #Resque.enqueue BigEarth::Blockchain::BootstrapChefClient, config
       end
       
-      get '/get_best_block_hash.json/:hash/:verbose' do
+      get '/get_best_block_hash.json' do
+        blockchain = BigEarth::Blockchain::Blockchain.new
+        blockchain.get_best_block_hash
+      end
+      
+      get '/get_block.json/:hash/:verbose' do
         # Parse data into ruby hash
         data = JSON.parse request.body.read
         config = data['config']
         
         blockchain = BigEarth::Blockchain::Blockchain.new
-        blockchain.get_best_block_hash params['hash'], params['verbose']
+        blockchain.get_block params['hash'], params['verbose']
       end
       
       get '/get_info.json' do
