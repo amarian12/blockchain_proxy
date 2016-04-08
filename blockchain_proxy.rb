@@ -1,5 +1,5 @@
 #$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/lib/workers"
-#$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/lib/big_earth/blockchain"
+$LOAD_PATH.unshift "#{File.dirname(__FILE__)}/lib/big_earth/blockchain"
 require 'sinatra/base'
 require "sinatra/config_file"
 require 'sinatra/json'
@@ -26,13 +26,9 @@ module BigEarth
       
       get '/get_info.json' do
         content_type :json
-        blockchain = Blockchain.new
-        info = blockchain.get_info
-        { 
-          status: 200,
-          info: info
-         }.to_json
-        #Resque.enqueue BigEarth::Blockchain::BootstrapChefClient, config
+        require 'blockchain'
+        blockchain = BigEarth::Blockchain::Blockchain.new
+        blockchain.get_info
       end
     end
   end

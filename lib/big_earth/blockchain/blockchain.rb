@@ -1,11 +1,11 @@
 module BigEarth 
   module Blockchain 
-    module Blockchain
+    class Blockchain
       def initialize 
       end
       
       def get_info
-        system "bitcoin-cli getinfo"
+        `bitcoin-cli getinfo`
       end
     end
   end
