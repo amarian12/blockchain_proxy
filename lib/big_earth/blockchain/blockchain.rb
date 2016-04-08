@@ -14,7 +14,7 @@ module BigEarth
         `bitcoin-cli getbestblockhash`
       end
       
-      def get_block hash, verbose
+      def get_block hash
         # 
         # If verbose is false, returns a string that is serialized, hex-encoded data for block 'hash'.
         # If verbose is true, returns an Object with information about block <hash>.
@@ -51,7 +51,7 @@ module BigEarth
         # > bitcoin-cli getblock "00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"
         # > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblock", "params": ["00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"] }' - H 'content-type: text/plain;' http://127.0.0.1:8332/
      
-        `bitcoin-cli getblock #{hash} #{verbose}`
+        `bitcoin-cli getblock #{hash}`
       end
       
       def get_info

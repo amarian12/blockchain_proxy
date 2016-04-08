@@ -30,13 +30,9 @@ module BigEarth
         { hash: blockchain.get_best_block_hash }.to_json
       end
       
-      get '/get_block.json/:hash/:verbose' do
-        # Parse data into ruby hash
-        data = JSON.parse request.body.read
-        config = data['config']
-        
+      get '/get_block.json/:hash' do
         blockchain = BigEarth::Blockchain::Blockchain.new
-        blockchain.get_block params['hash'], params['verbose']
+        blockchain.get_block params['hash']
       end
       
       get '/get_info.json' do
