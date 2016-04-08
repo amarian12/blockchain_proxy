@@ -27,7 +27,7 @@ module BigEarth
       
       get '/get_best_block_hash.json' do
         blockchain = BigEarth::Blockchain::Blockchain.new
-        blockchain.get_best_block_hash
+        { hash: blockchain.get_best_block_hash }.to_json
       end
       
       get '/get_block.json/:hash/:verbose' do
