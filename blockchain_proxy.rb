@@ -60,10 +60,20 @@ module BigEarth
         blockchain.get_chain_tips
       end
       
+      get '/get_difficulty.json' do
+        blockchain = BigEarth::Blockchain::Blockchain.new
+        blockchain.get_difficulty
+      end
+      
       get '/get_info.json' do
         content_type :json
         blockchain = BigEarth::Blockchain::Blockchain.new
         blockchain.get_info
+      end
+      
+      get '/get_mem_pool_info.json' do
+        blockchain = BigEarth::Blockchain::Blockchain.new
+        blockchain.get_mem_pool_info
       end
     end
   end

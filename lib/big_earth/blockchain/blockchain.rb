@@ -210,14 +210,36 @@ module BigEarth
        end
       
       def get_difficulty
+        # Returns the proof-of-work difficulty as a multiple of the minimum difficulty.
+        # 
+        # Result:
+        # n.nnn       (numeric) the proof-of-work difficulty as a multiple of the minimum difficulty.
+        # 
+        # Examples:
+        # > bitcoin-cli getdifficulty
+        # > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getdifficulty", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332/
         `bitcoin-cli getdifficulty`
       end
       
-      def get_mempool_info
+      def get_mem_pool_info
+        # Returns details on the active state of the TX memory pool.
+        # 
+        # Result:
+        # {
+        #   "size": xxxxx,               (numeric) Current tx count
+        #   "bytes": xxxxx,              (numeric) Sum of all tx sizes
+        #   "usage": xxxxx,              (numeric) Total memory usage for the mempool
+        #   "maxmempool": xxxxx,         (numeric) Maximum memory usage for the mempool
+        #   "mempoolminfee": xxxxx       (numeric) Minimum fee for tx to be accepted
+        # }
+        # 
+        # Examples:
+        # > bitcoin-cli getmempoolinfo
+        # > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getmempoolinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332/
         `bitcoin-cli getmempoolinfo`
       end
       
-      def get_raw_mempool
+      def get_raw_mem_pool
         `bitcoin-cli getrawmempool`
       end
       
