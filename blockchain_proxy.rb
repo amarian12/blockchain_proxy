@@ -40,6 +40,16 @@ module BigEarth
         blockchain.get_block_chain_info
       end
       
+      get '/get_block_count.json' do
+        blockchain = BigEarth::Blockchain::Blockchain.new
+        { block_count: blockchain.get_block_count }.to_json
+      end
+      
+      get '/get_block_hash.json/:index' do
+        blockchain = BigEarth::Blockchain::Blockchain.new
+        { block_hash: blockchain.get_block_hash(params[:index])}.to_json
+      end
+      
       get '/get_info.json' do
         content_type :json
         blockchain = BigEarth::Blockchain::Blockchain.new

@@ -117,18 +117,73 @@ module BigEarth
         # > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332/
         `bitcoin-cli getinfo`
       end
-      # getblockcount
-      # getblockhash index
+      
+      def get_block_count
+        # Returns the number of blocks in the longest block chain.
+        # 
+        # Result:
+        # n    (numeric) The current block count
+        # 
+        # Examples:
+        # > bitcoin-cli getblockcount
+        # > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblockcount", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+        `bitcoin-cli getblockcount`
+      end
+      
+      def get_block_hash index
+        # Returns hash of block in best-block-chain at index provided.
+        # 
+        # Arguments:
+        # 1. index         (numeric, required) The block index
+        # 
+        # Result:
+        # "hash"         (string) The block hash
+        # 
+        # Examples:
+        # > bitcoin-cli getblockhash 1000
+        # > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblockhash", "params": [1000] }' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+        `bitcoin-cli getblockhash #{index}`
+      end
+      
+      def getblockheader hash, verbose
       # getblockheader "hash" ( verbose )
+      end
+      
+      def getchaintips
       # getchaintips
+      end
+      
+      def getdifficulty
       # getdifficulty
+      end
+      
+      def getmempoolinfo
       # getmempoolinfo
+      end
+      
+      def getrawmempool verbose
       # getrawmempool ( verbose )
+      end
+      
+      def gettxout txid, n, includemempool
       # gettxout "txid" n ( includemempool )
+      end
+      
+      def gettxoutproof txid, blockhash
       # gettxoutproof ["txid",...] ( blockhash )
+      end
+      
+      def gettxoutsetinfo
       # gettxoutsetinfo
+      end
+      
+      def verifychain, checklevel, numblocks
       # verifychain ( checklevel numblocks )
+      end
+      
+      def verifytxoutproof proof
       # verifytxoutproof "proof"
+      end
     end
   end
 end
