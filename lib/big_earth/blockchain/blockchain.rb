@@ -177,7 +177,7 @@ module BigEarth
       # gettxoutsetinfo
       end
       
-      def verifychain, checklevel, numblocks
+      def verifychain checklevel, numblocks
       # verifychain ( checklevel numblocks )
       end
       
