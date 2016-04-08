@@ -62,7 +62,7 @@ module BigEarth
       
       get '/get_difficulty.json' do
         blockchain = BigEarth::Blockchain::Blockchain.new
-        blockchain.get_difficulty
+        { difficulty: blockchain.get_difficulty}.to_json
       end
       
       get '/get_info.json' do
