@@ -145,43 +145,99 @@ module BigEarth
         `bitcoin-cli getblockhash #{index}`
       end
       
-      def getblockheader hash, verbose
-      # getblockheader "hash" ( verbose )
+      def get_block_header hash
+        # If verbose is false, returns a string that is serialized, hex-encoded data for blockheader 'hash'.
+        # If verbose is true, returns an Object with information about blockheader <hash>.
+        # 
+        # Arguments:
+        # 1. "hash"          (string, required) The block hash
+        # 2. verbose           (boolean, optional, default=true) true for a json object, false for the hex encoded data
+        # 
+        # Result (for verbose = true):
+        # {
+        #   "hash" : "hash",     (string) the block hash (same as provided)
+        #   "confirmations" : n,   (numeric) The number of confirmations, or -1 if the block is not on the main chain
+        #   "height" : n,          (numeric) The block height or index
+        #   "version" : n,         (numeric) The block version
+        #   "merkleroot" : "xxxx", (string) The merkle root
+        #   "time" : ttt,          (numeric) The block time in seconds since epoch (Jan 1 1970 GMT)
+        #   "mediantime" : ttt,    (numeric) The median block time in seconds since epoch (Jan 1 1970 GMT)
+        #   "nonce" : n,           (numeric) The nonce
+        #   "bits" : "1d00ffff", (string) The bits
+        #   "difficulty" : x.xxx,  (numeric) The difficulty
+        #   "previousblockhash" : "hash",  (string) The hash of the previous block
+        #   "nextblockhash" : "hash",      (string) The hash of the next block
+        #   "chainwork" : "0000...1f3"     (string) Expected number of hashes required to produce the current chain (in hex)
+        # }
+        # 
+        # Result (for verbose=false):
+        # "data"             (string) A string that is serialized, hex-encoded data for block 'hash'.
+        # 
+        # Examples:
+        # > bitcoin-cli getblockheader "00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"
+        # > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblockheader", "params": ["00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+        `bitcoin-cli getblockheader #{hash}`
       end
       
-      def getchaintips
-      # getchaintips
+      def get_chain_tips
+        # Return information about all known tips in the block tree, including the main chain as well as orphaned branches.
+        # Result:
+        # [
+        #   {
+        #     "height": xxxx,         (numeric) height of the chain tip
+        #     "hash": "xxxx",         (string) block hash of the tip
+        #     "branchlen": 0          (numeric) zero for main chain
+        #     "status": "active"      (string) "active" for the main chain
+        #   },
+        #   {
+        #     "height": xxxx,
+        #     "hash": "xxxx",
+        #     "branchlen": 1          (numeric) length of branch connecting the tip to the main chain
+        #     "status": "xxxx"        (string) status of the chain (active, valid-fork, valid-headers, headers-only, invalid)
+        #   }
+        # ]
+        # Possible values for status:
+        # 1.  "invalid"               This branch contains at least one invalid block
+        # 2.  "headers-only"          Not all blocks for this branch are available, but the headers are valid
+        # 3.  "valid-headers"         All blocks are available for this branch, but they were never fully validated
+        # 4.  "valid-fork"            This branch is not part of the active chain, but is fully validated
+        # 5.  "active"                This is the tip of the active main chain, which is certainly valid
+        # 
+        # Examples:
+        # > bitcoin-cli getchaintips
+        # > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getchaintips", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332/
+        `bitcoin-cli getchaintips`
+       end
+      
+      def get_difficulty
+        `bitcoin-cli getdifficulty`
       end
       
-      def getdifficulty
-      # getdifficulty
+      def get_mempool_info
+        `bitcoin-cli getmempoolinfo`
       end
       
-      def getmempoolinfo
-      # getmempoolinfo
+      def get_raw_mempool
+        `bitcoin-cli getrawmempool`
       end
       
-      def getrawmempool verbose
-      # getrawmempool ( verbose )
-      end
-      
-      def gettxout txid, n, includemempool
+      def get_tx_out txid, n, includemempool
       # gettxout "txid" n ( includemempool )
       end
       
-      def gettxoutproof txid, blockhash
+      def get_tx_out_proof txid, blockhash
       # gettxoutproof ["txid",...] ( blockhash )
       end
       
-      def gettxoutsetinfo
-      # gettxoutsetinfo
+      def get_tx_outset_info
+        `bitcoin-cli gettxoutsetinfo`
       end
       
-      def verifychain checklevel, numblocks
+      def verify_chain checklevel, numblocks
       # verifychain ( checklevel numblocks )
       end
       
-      def verifytxoutproof proof
+      def verify_tx_out_proof proof
       # verifytxoutproof "proof"
       end
     end

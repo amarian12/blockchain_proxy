@@ -50,6 +50,16 @@ module BigEarth
         { block_hash: blockchain.get_block_hash(params[:index])}.to_json
       end
       
+      get '/get_block_header.json/:hash' do
+        blockchain = BigEarth::Blockchain::Blockchain.new
+        blockchain.get_block_header params[:hash]
+      end
+      
+      get '/get_chain_tips.json' do
+        blockchain = BigEarth::Blockchain::Blockchain.new
+        blockchain.get_chain_tips
+      end
+      
       get '/get_info.json' do
         content_type :json
         blockchain = BigEarth::Blockchain::Blockchain.new
