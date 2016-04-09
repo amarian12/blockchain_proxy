@@ -20,22 +20,28 @@ module BigEarth
       end
       
       get '/ping.json' do
-        content_type :json
         { status: 'pong' }.to_json
         #Resque.enqueue BigEarth::Blockchain::BootstrapChefClient, config
       end
       
-      # control
+      # Control
       
       get '/start.json' do
-        blockchain = BigEarth::Blockchain::Blockchain.new
-        { status: blockchain.start }.to_json
+        control = BigEarth::Blockchain::Control.new
+        { status: control.start }.to_json
       end
       
       get '/stop.json' do
-        blockchain = BigEarth::Blockchain::Blockchain.new
-        { status: blockchain.stop }.to_json
+        control = BigEarth::Blockchain::Control.new
+        { status: control.stop }.to_json
       end
+      
+      get '/get_info.json' do
+        control = BigEarth::Blockchain::Control.new
+        control.get_info
+      end
+      
+      # Blockchain
       
       get '/get_best_block_hash.json' do
         blockchain = BigEarth::Blockchain::Blockchain.new
@@ -75,12 +81,6 @@ module BigEarth
       get '/get_difficulty.json' do
         blockchain = BigEarth::Blockchain::Blockchain.new
         { difficulty: blockchain.get_difficulty }.to_json
-      end
-      
-      get '/get_info.json' do
-        content_type :json
-        blockchain = BigEarth::Blockchain::Blockchain.new
-        blockchain.get_info
       end
       
       get '/get_mem_pool_info.json' do
