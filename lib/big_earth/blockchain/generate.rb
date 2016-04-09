@@ -19,7 +19,7 @@ module BigEarth
         `bitcoin-cli generate #{numblocks}`
       end
       
-      def getgenerate
+      def get_generate
         # Return if the server is set to generate coins or not. The default is false.
         # It is set with the command line argument -gen (or bitcoin.conf setting gen)
         # It can also be set with the setgenerate call.
@@ -33,7 +33,7 @@ module BigEarth
         `bitcoin-cli getgenerate`
       end
       
-      def setgenerate generate, genproclimit
+      def set_generate generate, genproclimit
         # Set 'generate' true or false to turn generation on or off.
         # Generation is limited to 'genproclimit' processors, -1 is unlimited.
         # See the getgenerate call for the current setting.

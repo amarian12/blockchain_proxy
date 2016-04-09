@@ -132,14 +132,14 @@ module BigEarth
         generate.generate param[:numblocks]
       end
       
-      get '/getgenerate.json' do
+      get '/get_generate.json' do
         generate = BigEarth::Blockchain::Generate.new
-        generate.getgenerate
+        generate.get_generate
       end
       
-      get '/setgenerate.json/:generate' do
+      get '/set_generate.json/:generate' do
         generate = BigEarth::Blockchain::Generate.new
-        generate.setgenerate param[:generate]
+        generate.set_generate param[:generate]
       end
     end
   end
