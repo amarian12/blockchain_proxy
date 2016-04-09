@@ -246,6 +246,42 @@ module BigEarth
         transaction = BigEarth::Blockchain::Transaction.new
         transaction.sign_raw_transaction param[:hexstring]
       end
+      
+      # Util
+      get '/create_multi_sig.json/:nrequired' do
+        util = BigEarth::Blockchain::Util.new
+        util.create_multi_sig param[:nrequired]
+      end
+      
+      get '/estimate_fee.json/:nblocks' do
+        util = BigEarth::Blockchain::Util.new
+        util. param[:nblocks]
+      end
+      
+      get '/estimate_priority.json/:nblocks' do
+        util = BigEarth::Blockchain::Util.new
+        util.estimate_priority param[:nblocks]
+      end
+      
+      get '/estimate_smart_fee.json/:nblocks' do
+        util = BigEarth::Blockchain::Util.new
+        util.estimate_smart_fee param[:nblocks]
+      end
+      
+      get '/estimate_smart_priority.json/:nblocks' do
+        util = BigEarth::Blockchain::Util.new
+        util.estimate_smart_priority param[:nblocks]
+      end
+      
+      get '/validate_address.json/:bitcoinaddress' do
+        util = BigEarth::Blockchain::Util.new
+        util.validate_address param[:bitcoinaddress]
+      end
+      
+      get '/verify_message.json/:bitcoinaddress/:signature/:message' do
+        util = BigEarth::Blockchain::Util.new
+        util.verify_message param[:bitcoinaddress], param[:signature], param[:message]
+      end
     end
   end
 end
