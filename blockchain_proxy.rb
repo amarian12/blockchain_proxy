@@ -86,6 +86,11 @@ module BigEarth
         blockchain.get_tx_out params[:n]
       end
       
+      get '/get_tx_out_proof.json/:txid/:blockhash' do
+        blockchain = BigEarth::Blockchain::Blockchain.new
+        blockchain.get_tx_out_proof params[:txid] params[:blockhash]
+      end
+      
       get '/get_tx_outset_info.json' do
         blockchain = BigEarth::Blockchain::Blockchain.new
         blockchain.get_tx_outset_info

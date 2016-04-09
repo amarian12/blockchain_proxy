@@ -359,7 +359,7 @@ module BigEarth
         `bitcoin-cli gettxoutsetinfo`
       end
       
-      def verify_chain checklevel, numblocks
+      def verify_chain checklevel = nil, numblocks = nil
         # Verifies blockchain database.
         # 
         # Arguments:
@@ -372,7 +372,7 @@ module BigEarth
         # Examples:
         # > bitcoin-cli verifychain
         # > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "verifychain", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332/
-        `bitcoin-cli verifychain`
+        `bitcoin-cli verifychain #{checklevel} #{numblocks}`
         #  ( checklevel numblocks )
       end
       
