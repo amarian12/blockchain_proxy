@@ -142,7 +142,7 @@ module BigEarth
       # Mining
       get '/get_block_template.json/:jsonrequestobject' do
         mining = BigEarth::Blockchain::Mining.new
-        mining.get_block_template param[jsonrequestobject:]
+        mining.get_block_template param[:jsonrequestobject]
       end
       
       get '/get_mining_info.json' do
