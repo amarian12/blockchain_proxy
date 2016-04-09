@@ -25,6 +25,18 @@ module BigEarth
         #Resque.enqueue BigEarth::Blockchain::BootstrapChefClient, config
       end
       
+      # control
+      
+      get '/start.json' do
+        blockchain = BigEarth::Blockchain::Blockchain.new
+        { status: blockchain.start }.to_json
+      end
+      
+      get '/stop.json' do
+        blockchain = BigEarth::Blockchain::Blockchain.new
+        { status: blockchain.stop }.to_json
+      end
+      
       get '/get_best_block_hash.json' do
         blockchain = BigEarth::Blockchain::Blockchain.new
         { hash: blockchain.get_best_block_hash }.to_json

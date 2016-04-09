@@ -4,6 +4,18 @@ module BigEarth
       def initialize 
       end
       
+      # control
+      
+      def start
+        # Start Bitcoin server.
+        `bitcoind -daemon`
+      end
+      
+      def stop
+        # Stop Bitcoin server.
+        `bitcoin-cli stop`
+      end
+      
       def get_best_block_hash
         # Returns the hash of the best (tip) block in the longest block chain.
         # Result "hex" (string) the block hash hex encoded
@@ -54,7 +66,7 @@ module BigEarth
         `bitcoin-cli getblock #{hash}`
       end
       
-      def get_block_chain_info
+      def get_blockchain_info
         # Returns an object containing various state info regarding block chain processing.
         # 
         # Result:
