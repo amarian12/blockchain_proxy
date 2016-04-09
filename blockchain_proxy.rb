@@ -215,6 +215,37 @@ module BigEarth
         network = BigEarth::Blockchain::Network.new
         network.set_ban param[:ip], param[:type], param[:bantime], param[:absolute]
       end
+      
+      # Transaction
+      get '/create_raw_transaction.json/:txid/:address' do
+        transaction = BigEarth::Blockchain::Transaction.new
+        transaction.create_raw_transaction param[:txid], param[:address]
+      end
+      
+      get '/decode_raw_transaction.json/:hexstring' do
+        transaction = BigEarth::Blockchain::Transaction.new
+        transaction.decode_raw_transaction param[:hexstring]
+      end
+      
+      get '/decode_script.json/:hex' do
+        transaction = BigEarth::Blockchain::Transaction.new
+        transaction.decode_script param[:hex]
+      end
+      
+      get '/get_raw_transaction.json/:txid' do
+        transaction = BigEarth::Blockchain::Transaction.new
+        transaction.get_raw_transaction param[:txid]
+      end
+      
+      get '/send_raw_transaction.json/:hexstring' do
+        transaction = BigEarth::Blockchain::Transaction.new
+        transaction.send_raw_transaction param[:hexstring]
+      end
+      
+      get '/sign_raw_transaction.json/:hexstring' do
+        transaction = BigEarth::Blockchain::Transaction.new
+        transaction.sign_raw_transaction param[:hexstring]
+      end
     end
   end
 end
