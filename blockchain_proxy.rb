@@ -85,6 +85,21 @@ module BigEarth
         blockchain = BigEarth::Blockchain::Blockchain.new
         blockchain.get_tx_out params[:n]
       end
+      
+      get '/get_tx_outset_info.json' do
+        blockchain = BigEarth::Blockchain::Blockchain.new
+        blockchain.get_tx_outset_info
+      end
+      
+      get '/verify_chain.json' do
+        blockchain = BigEarth::Blockchain::Blockchain.new
+        blockchain.verify_chain
+      end
+      
+      get '/verify_tx_out_proof.json/:proof' do
+        blockchain = BigEarth::Blockchain::Blockchain.new
+        blockchain.verify_chain param[:proof]
+      end
     end
   end
 end
