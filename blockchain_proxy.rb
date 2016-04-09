@@ -47,7 +47,7 @@ module BigEarth
       
       get '/get_block_hash.json/:index' do
         blockchain = BigEarth::Blockchain::Blockchain.new
-        { block_hash: blockchain.get_block_hash(params[:index])}.to_json
+        { block_hash: blockchain.get_block_hash(params[:index]) }.to_json
       end
       
       get '/get_block_header.json/:hash' do
@@ -62,7 +62,7 @@ module BigEarth
       
       get '/get_difficulty.json' do
         blockchain = BigEarth::Blockchain::Blockchain.new
-        { difficulty: blockchain.get_difficulty}.to_json
+        { difficulty: blockchain.get_difficulty }.to_json
       end
       
       get '/get_info.json' do
@@ -98,7 +98,7 @@ module BigEarth
       
       get '/verify_chain.json' do
         blockchain = BigEarth::Blockchain::Blockchain.new
-        blockchain.verify_chain
+        { verified: blockchain.verify_chain }.to_json
       end
       
       get '/verify_tx_out_proof.json/:proof' do
