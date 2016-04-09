@@ -164,6 +164,57 @@ module BigEarth
         mining = BigEarth::Blockchain::Mining.new
         mining.submit_block param[:hexdata]
       end
+      
+      # Network
+      get '/add_node.json/:node/:type' do
+        network = BigEarth::Blockchain::Network.new
+        network.add_node param[:node], param[:type]
+      end
+      
+      get '/disconnect_node.json/:node' do
+        network = BigEarth::Blockchain::Network.new
+        network.disconnect_node param[:node]
+      end
+      
+      get '/get_added_node_info.json/:dns' do
+        network = BigEarth::Blockchain::Network.new
+        network.get_added_node_info param[:dns]
+      end
+      
+      get '/get_connection_count.json' do
+        network = BigEarth::Blockchain::Network.new
+        network.get_connection_count
+      end
+      
+      get '/get_net_totals.json' do
+        network = BigEarth::Blockchain::Network.new
+        network.get_net_totals
+      end
+      
+      get '/get_network_info.json' do
+        network = BigEarth::Blockchain::Network.new
+        network.get_network_info
+      end
+      
+      get '/get_peer_info.json' do
+        network = BigEarth::Blockchain::Network.new
+        network.get_peer_info
+      end
+      
+      get '/list_banned.json' do
+        network = BigEarth::Blockchain::Network.new
+        network.list_banned
+      end
+      
+      get '/ping.json' do
+        network = BigEarth::Blockchain::Network.new
+        network.ping
+      end
+      
+      get '/set_ban.json/:ip/:type/:bantime/:absolute' do
+        network = BigEarth::Blockchain::Network.new
+        network.set_ban param[:ip] param[:type] param[:bantime] param[:absolute]
+      end
     end
   end
 end

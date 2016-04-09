@@ -1,21 +1,48 @@
 module BigEarth 
   module Blockchain 
     class Network
-      # == Network ==
-      # addnode "node" "add|remove|onetry"
-      # clearbanned
-      # disconnectnode "node"
-      # getaddednodeinfo dns ( "node" )
-      # getconnectioncount
-      # getnettotals
-      # getnetworkinfo
-      # getpeerinfo
-      # listbanned
-      # ping
-      # setban "ip(/netmask)" "add|remove" (bantime) (absolute)
-      def start
-        # Start Bitcoin server.
-        `bitcoind -daemon`
+      def add_node node, type
+        `bitcoin-cli addnode #{node} #{type}`
+      end
+      
+      def clear_banned
+        `bitcoin-cli clearbanned`
+      end
+      
+      def disconnect_node node
+        `bitcoin-cli disconnectnode #{node}`
+      end
+      
+      def get_added_node_info dns
+        `bitcoin-cli getaddednodeinfo #{dns}`
+      end
+      
+      def get_connection_count
+        `bitcoin-cli getconnectioncount`
+      end
+      
+      def get_net_totals
+        `bitcoin-cli getnettotals`
+      end
+      
+      def get_network_info
+        `bitcoin-cli getnetworkinfo`
+      end
+      
+      def get_peer_info
+        `bitcoin-cli getpeerinfo`
+      end
+      
+      def list_banned
+        `bitcoin-cli listbanned`
+      end
+      
+      def ping
+        `bitcoin-cli ping`
+      end
+      
+      def set_ban ip, type, bantime, absolute
+        `bitcoin-cli setban #{ip} #{type} #{bantime} #{absolute}`
       end
     end
   end
