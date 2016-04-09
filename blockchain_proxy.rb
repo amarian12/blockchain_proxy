@@ -38,6 +38,7 @@ module BigEarth
       end
       
       get '/get_info.json' do
+        content_type :json
         control = BigEarth::Blockchain::Control.new
         control.get_info
       end
