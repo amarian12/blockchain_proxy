@@ -25,8 +25,8 @@ module BigEarth
         username == ENV['BLOCKCHAIN_PROXY_USERNAME'] and password == ENV['BLOCKCHAIN_PROXY_PASSWORD']
       end
       
-      get '/ping.json' do
-        { status: 'pong' }.to_json
+      get '/hello.json' do
+        { status: 'world' }.to_json
         #Resque.enqueue BigEarth::Blockchain::BootstrapChefClient, config
       end
       
@@ -183,7 +183,7 @@ module BigEarth
       
       get '/get_connection_count.json' do
         network = BigEarth::Blockchain::Network.new
-        network.get_connection_count
+        { connection_count: network.get_connection_count }.to_json
       end
       
       get '/get_net_totals.json' do
