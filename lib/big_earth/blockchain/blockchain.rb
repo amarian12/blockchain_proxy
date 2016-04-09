@@ -336,6 +336,7 @@ module BigEarth
         # Result:
         # "data"           (string) A string that is a serialized, hex-encoded data for the proof.
         #gettxoutproof ["txid",...] ( blockhash )
+        `bitcoin-cli gettxoutproof #{txid} #{blockhash}`
       end
       
       def get_tx_outset_info
