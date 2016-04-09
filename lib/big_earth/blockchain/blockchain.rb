@@ -276,7 +276,7 @@ module BigEarth
         `bitcoin-cli getrawmempool true`
       end
       
-      def get_tx_out n, 
+      def get_tx_out n 
         # Returns details about an unspent transaction output.
         # 
         # Arguments:
