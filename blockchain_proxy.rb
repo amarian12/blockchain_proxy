@@ -7,6 +7,11 @@ require 'json'
 #require 'resque'
 require 'blockchain'
 require 'control'
+require 'generate'
+require 'mining'
+require 'network'
+require 'transaction'
+require 'util'
 module BigEarth
   module Blockchain
     class BlockchainProxy < Sinatra::Base
@@ -118,6 +123,23 @@ module BigEarth
       get '/verify_tx_out_proof.json/:proof' do
         blockchain = BigEarth::Blockchain::Blockchain.new
         blockchain.verify_chain param[:proof]
+      end
+      
+      # Generate
+      
+      get '/generate.json/:numblocks' do
+        generate = BigEarth::Blockchain::Generate.new
+        generate.generate param[:numblocks]
+      end
+      
+      get '/getgenerate.json' do
+        generate = BigEarth::Blockchain::Generate.new
+        generate.getgenerate
+      end
+      
+      get '/setgenerate.json/:generate' do
+        generate = BigEarth::Blockchain::Generate.new
+        generate.setgenerate param[:generate]
       end
     end
   end
