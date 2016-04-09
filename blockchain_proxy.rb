@@ -78,12 +78,12 @@ module BigEarth
       
       get '/get_raw_mem_pool.json' do
         blockchain = BigEarth::Blockchain::Blockchain.new
-        blockchain.get_mem_pool_info
+        blockchain.get_raw_mem_pool
       end
       
       get '/get_tx_out.json/:n' do
         blockchain = BigEarth::Blockchain::Blockchain.new
-        blockchain.get_mem_pool_info
+        blockchain.get_tx_out params[:n]
       end
     end
   end
