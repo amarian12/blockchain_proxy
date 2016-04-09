@@ -30,26 +30,7 @@ module BigEarth
         #Resque.enqueue BigEarth::Blockchain::BootstrapChefClient, config
       end
       
-      # Control
-      
-      get '/start.json' do
-        control = BigEarth::Blockchain::Control.new
-        { status: control.start }.to_json
-      end
-      
-      get '/stop.json' do
-        control = BigEarth::Blockchain::Control.new
-        { status: control.stop }.to_json
-      end
-      
-      get '/get_info.json' do
-        content_type :json
-        control = BigEarth::Blockchain::Control.new
-        control.get_info
-      end
-      
       # Blockchain
-      
       get '/get_best_block_hash.json' do
         blockchain = BigEarth::Blockchain::Blockchain.new
         { hash: blockchain.get_best_block_hash }.to_json
@@ -125,8 +106,24 @@ module BigEarth
         blockchain.verify_chain param[:proof]
       end
       
-      # Generate
+      # Control
+      get '/start.json' do
+        control = BigEarth::Blockchain::Control.new
+        { status: control.start }.to_json
+      end
       
+      get '/stop.json' do
+        control = BigEarth::Blockchain::Control.new
+        { status: control.stop }.to_json
+      end
+      
+      get '/get_info.json' do
+        content_type :json
+        control = BigEarth::Blockchain::Control.new
+        control.get_info
+      end
+      
+      # Generate
       get '/generate.json/:numblocks' do
         generate = BigEarth::Blockchain::Generate.new
         generate.generate param[:numblocks]
@@ -140,6 +137,32 @@ module BigEarth
       get '/set_generate.json/:generate' do
         generate = BigEarth::Blockchain::Generate.new
         generate.set_generate param[:generate]
+      end
+      
+      # Mining
+      get '/get_block_template.json/:jsonrequestobject' do
+        mining = BigEarth::Blockchain::Mining.new
+        mining.get_block_template param[jsonrequestobject:]
+      end
+      
+      get '/get_mining_info.json' do
+        mining = BigEarth::Blockchain::Mining.new
+        mining.get_mining_info
+      end
+      
+      get '/get_network_hashps.json/:blocks' do
+        mining = BigEarth::Blockchain::Mining.new
+        mining.get_network_hashps param[:blocks]
+      end
+      
+      get '/prioritise_transaction.json/:txid' do
+        mining = BigEarth::Blockchain::Mining.new
+        mining.prioritise_transaction param[:txid]
+      end
+      
+      get '/submit_block.json/:hexdata' do
+        mining = BigEarth::Blockchain::Mining.new
+        mining.submit_block param[:hexdata]
       end
     end
   end
