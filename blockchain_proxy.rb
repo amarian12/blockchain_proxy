@@ -213,7 +213,7 @@ module BigEarth
       
       get '/set_ban.json/:ip/:type/:bantime/:absolute' do
         network = BigEarth::Blockchain::Network.new
-        network.set_ban param[:ip] param[:type] param[:bantime] param[:absolute]
+        network.set_ban param[:ip], param[:type], param[:bantime], param[:absolute]
       end
     end
   end
