@@ -6,6 +6,7 @@ require 'sinatra/json'
 require 'json'
 #require 'resque'
 require 'blockchain'
+require 'control'
 module BigEarth
   module Blockchain
     class BlockchainProxy < Sinatra::Base
