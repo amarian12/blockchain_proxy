@@ -134,7 +134,7 @@ module BigEarth
       
       get '/get_generate.json' do
         generate = BigEarth::Blockchain::Generate.new
-        generate.get_generate
+        { generate: generate.get_generate }.to_json
       end
       
       get '/set_generate.json/:generate' do
