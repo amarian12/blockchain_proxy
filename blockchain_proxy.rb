@@ -107,12 +107,12 @@ module BigEarth
       end
       
       # Control
-      get '/start.json' do
+      post '/start.json' do
         control = BigEarth::Blockchain::Control.new
         { status: control.start }.to_json
       end
       
-      get '/stop.json' do
+      post '/stop.json' do
         control = BigEarth::Blockchain::Control.new
         { status: control.stop }.to_json
       end
