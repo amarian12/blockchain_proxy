@@ -36,9 +36,9 @@ module BigEarth
         { hash: blockchain.get_best_block_hash }.to_json
       end
       
-      get '/get_block.json/:hash' do
+      get '/get_block.json' do
         blockchain = BigEarth::Blockchain::Blockchain.new
-        blockchain.get_block params['hash']
+        blockchain.get_block params['']
       end
       
       get '/get_blockchain_info.json' do
