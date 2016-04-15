@@ -85,9 +85,9 @@ module BigEarth
         blockchain.get_raw_mem_pool
       end
       
-      get '/get_tx_out.json/:n' do
+      get '/get_tx_out.json' do
         blockchain = BigEarth::Blockchain::Blockchain.new
-        blockchain.get_tx_out params[:n]
+        blockchain.get_tx_out params['txid'] params['n'] params['includemempool']
       end
       
       get '/get_tx_out_proof.json/:txid/:blockhash' do

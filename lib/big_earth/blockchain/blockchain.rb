@@ -245,7 +245,7 @@ module BigEarth
         `bitcoin-cli getrawmempool true`
       end
       
-      def get_tx_out n 
+      def get_tx_out txid, n, includemempool 
         # Returns details about an unspent transaction output.
         # 
         # Arguments:
@@ -281,7 +281,7 @@ module BigEarth
         # 
         # As a json rpc call
         # > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gettxout", "params": ["txid", 1] }' -H 'content-type: text/plain;' http://127.0.0.1:8332/
-        `bitcoin-cli gettxout "txid" #{n}`
+        `bitcoin-cli gettxout #{txid} #{n} #{includemempool}`
       end
       
       def get_tx_out_proof txid, blockhash
