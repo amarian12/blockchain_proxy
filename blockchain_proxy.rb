@@ -55,9 +55,9 @@ module BigEarth
         { block_count: blockchain.get_block_count }.to_json
       end
       
-      get '/get_block_hash.json/:index' do
+      get '/get_block_hash.json' do
         blockchain = BigEarth::Blockchain::Blockchain.new
-        { block_hash: blockchain.get_block_hash(params[:index]) }.to_json
+        { block_hash: blockchain.get_block_hash(params['index']) }.to_json
       end
       
       get '/get_block_header.json/:hash' do
