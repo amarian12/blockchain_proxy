@@ -42,6 +42,7 @@ module BigEarth
           blockchain.get_block params['hash'], params['verbose']
         elsif params['verbose'] == 'false'
           { hex: blockchain.get_best_block_hash }.to_json
+        end
       end
       
       get '/get_blockchain_info.json' do
