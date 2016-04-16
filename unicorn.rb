@@ -1,11 +1,11 @@
-working_directory "/root/blockchain_proxy"
+working_directory "/home/big_earth_blockchain/blockchain_proxy"
 
-pid "/root/blockchain_proxy/pids/unicorn.pid"
+pid "/home/big_earth_blockchain/blockchain_proxy/pids/unicorn.pid"
 
-stderr_path "/root/blockchain_proxy/logs/unicorn.log"
-stdout_path "/root/blockchain_proxy/logs/unicorn.log"
+stderr_path "/home/big_earth_blockchain/blockchain_proxy/logs/unicorn.log"
+stdout_path "/home/big_earth_blockchain/blockchain_proxy/logs/unicorn.log"
 
-listen "/tmp/unicorn.myapp.sock"
+listen "/tmp/unicorn.blockchain_proxy.sock"
 
 worker_processes 2
 

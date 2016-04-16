@@ -36,9 +36,13 @@ module BigEarth
         { hash: blockchain.get_best_block_hash }.to_json
       end
       
-      get '/get_block.json/:hash' do
+      get '/get_block.json' do
         blockchain = BigEarth::Blockchain::Blockchain.new
-        blockchain.get_block params['hash']
+        if params['verbose'] == 'true'
+          blockchain.get_block params['hash'], params['verbose']
+        elsif params['verbose'] == 'false'
+          { hex: blockchain.get_best_block_hash }.to_json
+        end
       end
       
       get '/get_blockchain_info.json' do
@@ -51,14 +55,14 @@ module BigEarth
         { block_count: blockchain.get_block_count }.to_json
       end
       
-      get '/get_block_hash.json/:index' do
+      get '/get_block_hash.json' do
         blockchain = BigEarth::Blockchain::Blockchain.new
-        { block_hash: blockchain.get_block_hash(params[:index]) }.to_json
+        { block_hash: blockchain.get_block_hash(params['index']) }.to_json
       end
       
-      get '/get_block_header.json/:hash' do
+      get '/get_block_header.json' do
         blockchain = BigEarth::Blockchain::Blockchain.new
-        blockchain.get_block_header params[:hash]
+        blockchain.get_block_header params['hash'], params['verbose']
       end
       
       get '/get_chain_tips.json' do
@@ -81,9 +85,9 @@ module BigEarth
         blockchain.get_raw_mem_pool
       end
       
-      get '/get_tx_out.json/:n' do
+      get '/get_tx_out.json' do
         blockchain = BigEarth::Blockchain::Blockchain.new
-        blockchain.get_tx_out params[:n]
+        blockchain.get_tx_out params['txid'], params['n'], params['includemempool']
       end
       
       get '/get_tx_out_proof.json/:txid/:blockhash' do

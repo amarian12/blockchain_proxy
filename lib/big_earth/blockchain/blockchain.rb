@@ -11,7 +11,7 @@ module BigEarth
         `bitcoin-cli getbestblockhash`
       end
       
-      def get_block hash
+      def get_block hash, verbose
         # 
         # If verbose is false, returns a string that is serialized, hex-encoded data for block 'hash'.
         # If verbose is true, returns an Object with information about block <hash>.
@@ -48,7 +48,7 @@ module BigEarth
         # > bitcoin-cli getblock "00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"
         # > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblock", "params": ["00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"] }' - H 'content-type: text/plain;' http://127.0.0.1:8332/
      
-        `bitcoin-cli getblock #{hash}`
+        `bitcoin-cli getblock #{hash} #{verbose}`
       end
       
       def get_blockchain_info
@@ -114,7 +114,7 @@ module BigEarth
         `bitcoin-cli getblockhash #{index}`
       end
       
-      def get_block_header hash
+      def get_block_header hash, verbose
         # If verbose is false, returns a string that is serialized, hex-encoded data for blockheader 'hash'.
         # If verbose is true, returns an Object with information about blockheader <hash>.
         # 
@@ -145,7 +145,7 @@ module BigEarth
         # Examples:
         # > bitcoin-cli getblockheader "00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"
         # > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getblockheader", "params": ["00000000c937983704a73af28acdec37b049d214adbda81d7e2a3dd146f6ed09"] }' -H 'content-type: text/plain;' http://127.0.0.1:8332/
-        `bitcoin-cli getblockheader #{hash}`
+        `bitcoin-cli getblockheader #{hash} #{verbose}`
       end
       
       def get_chain_tips
@@ -245,7 +245,7 @@ module BigEarth
         `bitcoin-cli getrawmempool true`
       end
       
-      def get_tx_out n 
+      def get_tx_out txid, n, includemempool 
         # Returns details about an unspent transaction output.
         # 
         # Arguments:
@@ -281,7 +281,7 @@ module BigEarth
         # 
         # As a json rpc call
         # > curl --user myusername --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "gettxout", "params": ["txid", 1] }' -H 'content-type: text/plain;' http://127.0.0.1:8332/
-        `bitcoin-cli gettxout "txid" #{n}`
+        `bitcoin-cli gettxout #{txid} #{n} #{includemempool}`
       end
       
       def get_tx_out_proof txid, blockhash
